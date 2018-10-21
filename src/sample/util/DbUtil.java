@@ -11,13 +11,12 @@ public class DbUtil {
     //Connection
     private static Connection conn = null;
 
-
     private static final String connectionUrl = "jdbc:sqlserver://localhost:1433;database=DesktopPaymentSystem;integratedSecurity=true;";
 
     public void dbConnect() throws ClassNotFoundException, SQLException {
         //com.microsoft.sqlserver:mssql-jdbc:7.0.0.jre8
 
-        //Setting sql server JDBC Driver
+        //Setting SQL SERVER JDBC Driver
         try {
             Class.forName(SQLSERVER_DRIVER);
         } catch (ClassNotFoundException e) {
@@ -28,7 +27,7 @@ public class DbUtil {
 
         System.out.println("SQL SERVER JDBC Driver Registered!");
 
-        //Establish the Oracle Connection using Connection String
+        //Establish the SQL SERVER Connection using Connection String
         try {
             conn = DriverManager.getConnection(connectionUrl);
         } catch (SQLException e) {
