@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>b419244f-6978-42a6-9b65-879dad574d73.SCHEMA:main</OriginalElement>
+  <nodes>
+    <node x="247.4866482504604" y="333.47513812154693">b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.CashReceipt</node>
+    <node x="-38.00000000000003" y="247.0">b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.Product</node>
+    <node x="469.5" y="0.0">b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.sqlite_master</node>
+    <node x="-39.00000000000003" y="91.0">b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.Shop</node>
+    <node x="241.0" y="10.0">b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.Cashier</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.CashReceipt" target="b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.Product">
+      <point x="0.0" y="-70.0" />
+      <point x="243.58333333333331" y="336.0" />
+      <point x="223.5" y="338.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+    <edge source="b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.CashReceipt" target="b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.Shop">
+      <point x="60.333333333333314" y="-70.0" />
+      <point x="348.91666666666663" y="289.0" />
+      <point x="342.5" y="286.0" />
+      <point x="282.5" y="249.0" />
+      <point x="230.16666666666663" y="234.0" />
+      <point x="53.66666666666662" y="48.0" />
+    </edge>
+    <edge source="b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.Product" target="b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.Shop">
+      <point x="0.0" y="-59.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.Cashier" target="b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.Shop">
+      <point x="0.0" y="-59.0" />
+      <point x="222.0" y="92.0" />
+      <point x="187.83333333333331" y="107.0" />
+      <point x="-53.66666666666666" y="48.0" />
+    </edge>
+    <edge source="b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.CashReceipt" target="b419244f-6978-42a6-9b65-879dad574d73.TABLE:main.Cashier">
+      <point x="-60.33333333333334" y="-70.0" />
+      <point x="284.25" y="278.0" />
+      <point x="291.0" y="195.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="194.5" y="209.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+

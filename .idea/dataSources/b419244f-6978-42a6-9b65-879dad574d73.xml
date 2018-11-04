@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="identifier.sqlite">
+  <database-model serializer="dbm" rdbms="SQLITE" format-version="4.11">
+    <root id="1">
+      <ServerVersion>3.25.1</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="main">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <collation id="3" parent="1" name="BINARY"/>
+    <collation id="4" parent="1" name="NOCASE"/>
+    <collation id="5" parent="1" name="RTRIM"/>
+    <table id="6" parent="2" name="CashReceipt"/>
+    <table id="7" parent="2" name="Cashier"/>
+    <table id="8" parent="2" name="Product"/>
+    <table id="9" parent="2" name="Shop"/>
+    <table id="10" parent="2" name="sqlite_master">
+      <System>1</System>
+    </table>
+    <column id="11" parent="6" name="cashReceiptId">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="12" parent="6" name="productId">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="13" parent="6" name="cashierId">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="14" parent="6" name="productsAmount">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="15" parent="6" name="shopId">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="16" parent="6" name="sqlite_autoindex_CashReceipt_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>cashierId</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="17" parent="6" name="PK_CASHRECEIPT">
+      <ColNames>cashierId</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_CashReceipt_1</UnderlyingIndexName>
+    </key>
+    <foreign-key id="18" parent="6" name="CashReceipt_Product_productId_fk">
+      <ColNames>productId</ColNames>
+      <RefTableName>Product</RefTableName>
+      <RefKeyName>PK_Product</RefKeyName>
+      <RefColNames>productId</RefColNames>
+    </foreign-key>
+    <foreign-key id="19" parent="6" name="CashReceipt_Cashier_cashierId_fk">
+      <ColNames>cashierId</ColNames>
+      <RefTableName>Cashier</RefTableName>
+      <RefKeyName>PK_CASHIER</RefKeyName>
+      <RefColNames>cashierId</RefColNames>
+    </foreign-key>
+    <foreign-key id="20" parent="6" name="CashReceipt_Shop_shopId_fk">
+      <ColNames>shopId</ColNames>
+      <RefTableName>Shop</RefTableName>
+      <RefKeyName>PK_SHOP</RefKeyName>
+      <RefColNames>shopId</RefColNames>
+    </foreign-key>
+    <column id="21" parent="7" name="cashierId">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="22" parent="7" name="firstName">
+      <Position>2</Position>
+      <DataType>nchar(600)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="23" parent="7" name="lastName">
+      <Position>3</Position>
+      <DataType>nchar(600)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="7" name="shopId">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="25" parent="7" name="sqlite_autoindex_Cashier_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>cashierId</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="26" parent="7" name="PK_CASHIER">
+      <ColNames>cashierId</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_Cashier_1</UnderlyingIndexName>
+    </key>
+    <foreign-key id="27" parent="7" name="Cashier_Shop_shopId_fk">
+      <ColNames>shopId</ColNames>
+      <RefTableName>Shop</RefTableName>
+      <RefKeyName>PK_SHOP</RefKeyName>
+      <RefColNames>shopId</RefColNames>
+    </foreign-key>
+    <column id="28" parent="8" name="productId">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="29" parent="8" name="name">
+      <Position>2</Position>
+      <DataType>nchar(600)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="30" parent="8" name="price">
+      <Position>3</Position>
+      <DataType>money|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="31" parent="8" name="shopId">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="32" parent="8" name="sqlite_autoindex_Product_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>productId</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="33" parent="8" name="PK_Product">
+      <ColNames>productId</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_Product_1</UnderlyingIndexName>
+    </key>
+    <foreign-key id="34" parent="8" name="Product_Shop_shopId_fk">
+      <ColNames>shopId</ColNames>
+      <RefTableName>Shop</RefTableName>
+      <RefKeyName>PK_SHOP</RefKeyName>
+      <RefColNames>shopId</RefColNames>
+    </foreign-key>
+    <column id="35" parent="9" name="shopId">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="9" name="name">
+      <Position>2</Position>
+      <DataType>nchar(600)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="37" parent="9" name="address">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="38" parent="9" name="sqlite_autoindex_Shop_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>shopId</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="39" parent="9" name="PK_SHOP">
+      <ColNames>shopId</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_Shop_1</UnderlyingIndexName>
+    </key>
+    <column id="40" parent="10" name="type">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="41" parent="10" name="name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="42" parent="10" name="tbl_name">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="43" parent="10" name="rootpage">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="44" parent="10" name="sql">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+    </column>
+  </database-model>
+</dataSource>
