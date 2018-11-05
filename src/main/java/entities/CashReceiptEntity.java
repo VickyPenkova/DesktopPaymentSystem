@@ -1,43 +1,22 @@
 package entities;
 
-import javax.persistence.*;
-import java.io.Serializable;
+public class CashReceiptEntity {
+    private int cashReceiptId;
+    private int productsAmount;
 
-@Entity
-@Table(name = "CashReceipt", schema = "main")
-public class CashReceiptEntity implements Serializable {
-    private Object cashReceiptId;
-    private Object cashierId;
-    private Object productsAmount;
-    private CashierEntity cashierByCashierId;
-
-    @Basic
-    @Column(name = "cashReceiptId")
-    public Object getCashReceiptId() {
+    public int getCashReceiptId() {
         return cashReceiptId;
     }
 
-    public void setCashReceiptId(Object cashReceiptId) {
+    public void setCashReceiptId(int cashReceiptId) {
         this.cashReceiptId = cashReceiptId;
     }
 
-    @Id
-    @Column(name = "cashierId")
-    public Object getCashierId() {
-        return cashierId;
-    }
-
-    public void setCashierId(Object cashierId) {
-        this.cashierId = cashierId;
-    }
-
-    @Basic
-    @Column(name = "productsAmount")
-    public Object getProductsAmount() {
+    public int getProductsAmount() {
         return productsAmount;
     }
 
-    public void setProductsAmount(Object productsAmount) {
+    public void setProductsAmount(int productsAmount) {
         this.productsAmount = productsAmount;
     }
 
@@ -48,30 +27,16 @@ public class CashReceiptEntity implements Serializable {
 
         CashReceiptEntity that = (CashReceiptEntity) o;
 
-        if (cashReceiptId != null ? !cashReceiptId.equals(that.cashReceiptId) : that.cashReceiptId != null)
-            return false;
-        if (cashierId != null ? !cashierId.equals(that.cashierId) : that.cashierId != null) return false;
-        if (productsAmount != null ? !productsAmount.equals(that.productsAmount) : that.productsAmount != null)
-            return false;
+        if (cashReceiptId != that.cashReceiptId) return false;
+        if (productsAmount != that.productsAmount) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = cashReceiptId != null ? cashReceiptId.hashCode() : 0;
-        result = 31 * result + (cashierId != null ? cashierId.hashCode() : 0);
-        result = 31 * result + (productsAmount != null ? productsAmount.hashCode() : 0);
+        int result = cashReceiptId;
+        result = 31 * result + productsAmount;
         return result;
-    }
-
-    @OneToOne
-    @JoinColumn(name = "cashierId", referencedColumnName = "cashierId", nullable = false)
-    public CashierEntity getCashierByCashierId() {
-        return cashierByCashierId;
-    }
-
-    public void setCashierByCashierId(CashierEntity cashierByCashierId) {
-        this.cashierByCashierId = cashierByCashierId;
     }
 }

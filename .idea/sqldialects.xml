@@ -3,7 +3,5 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/../../DesktopPaymentSystem/create_database_DesktopPaymentSystem.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$" dialect="GenericSQL" />
-    <file url="file://$USER_HOME$/Downloads/scripForDesktopPaymentSystemDbCreation.sql" dialect="SQLite" />
-    <file url="file://$USER_HOME$/Downloads/script_for_creating_DesktopPaymentSystem_table.sql" dialect="TSQL" />
   </component>
 </project>

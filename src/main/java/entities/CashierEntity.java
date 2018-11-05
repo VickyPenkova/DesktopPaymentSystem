@@ -1,42 +1,31 @@
 package entities;
 
-import javax.persistence.*;
-import java.io.Serializable;
+public class CashierEntity {
+    private int cashierId;
+    private String firstName;
+    private String lastName;
 
-@Entity
-@Table(name = "Cashier", schema = "main")
-public class CashierEntity implements Serializable {
-    private Object cashierId;
-    private Object firstName;
-    private Object lastName;
-
-    @Id
-    @Column(name = "cashierId")
-    public Object getCashierId() {
+    public int getCashierId() {
         return cashierId;
     }
 
-    public void setCashierId(Object cashierId) {
+    public void setCashierId(int cashierId) {
         this.cashierId = cashierId;
     }
 
-    @Basic
-    @Column(name = "firstName")
-    public Object getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(Object firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    @Basic
-    @Column(name = "lastName")
-    public Object getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(Object lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
@@ -47,7 +36,7 @@ public class CashierEntity implements Serializable {
 
         CashierEntity that = (CashierEntity) o;
 
-        if (cashierId != null ? !cashierId.equals(that.cashierId) : that.cashierId != null) return false;
+        if (cashierId != that.cashierId) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
 
@@ -56,7 +45,7 @@ public class CashierEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = cashierId != null ? cashierId.hashCode() : 0;
+        int result = cashierId;
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         return result;

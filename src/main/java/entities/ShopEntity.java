@@ -1,37 +1,26 @@
 package entities;
 
-import javax.persistence.*;
-import java.io.Serializable;
-
-@Entity
-@Table(name = "Shop", schema = "main", catalog = "")
-public class ShopEntity implements Serializable {
-    private Object shopId;
-    private Object name;
+public class ShopEntity {
+    private int shopId;
+    private String name;
     private String address;
 
-    @Id
-    @Column(name = "shopId")
-    public Object getShopId() {
+    public int getShopId() {
         return shopId;
     }
 
-    public void setShopId(Object shopId) {
+    public void setShopId(int shopId) {
         this.shopId = shopId;
     }
 
-    @Basic
-    @Column(name = "name")
-    public Object getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Object name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -47,7 +36,7 @@ public class ShopEntity implements Serializable {
 
         ShopEntity that = (ShopEntity) o;
 
-        if (shopId != null ? !shopId.equals(that.shopId) : that.shopId != null) return false;
+        if (shopId != that.shopId) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
 
@@ -56,7 +45,7 @@ public class ShopEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = shopId != null ? shopId.hashCode() : 0;
+        int result = shopId;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;

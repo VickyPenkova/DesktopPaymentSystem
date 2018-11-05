@@ -1,42 +1,33 @@
 package entities;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import java.math.BigDecimal;
 
-@Entity
-@Table(name = "Product", schema = "main", catalog = "")
-public class ProductEntity implements Serializable {
-    private Object productId;
-    private Object name;
-    private Object price;
+public class ProductEntity {
+    private int productId;
+    private String name;
+    private BigDecimal price;
 
-    @Id
-    @Column(name = "productId")
-    public Object getProductId() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(Object productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 
-    @Basic
-    @Column(name = "name")
-    public Object getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Object name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "price")
-    public Object getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Object price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -47,7 +38,7 @@ public class ProductEntity implements Serializable {
 
         ProductEntity that = (ProductEntity) o;
 
-        if (productId != null ? !productId.equals(that.productId) : that.productId != null) return false;
+        if (productId != that.productId) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
 
@@ -56,7 +47,7 @@ public class ProductEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = productId != null ? productId.hashCode() : 0;
+        int result = productId;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         return result;

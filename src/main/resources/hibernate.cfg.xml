@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.archive.autodetection">class</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">P@ssmysql</property>
+        <!-- Disable the second-level cache  -->
+        <property name="cache.provider_class">org.hibernate.cache.internal.DisabledCaching</property>
+        <property name="packagesToScan">entities</property>
+
+        <mapping class="entities.CashReceiptEntity"/>
+        <mapping class="entities.CashierEntity"/>
+        <mapping class="entities.ProductEntity"/>
+        <mapping class="entities.ShopEntity"/>
+        <mapping resource="entities/CashReceiptEntity.hbm.xml"/>
+        <mapping resource="entities/CashierEntity.hbm.xml"/>
+        <mapping resource="entities/ProductEntity.hbm.xml"/>
+        <mapping resource="entities/ShopEntity.hbm.xml"/>
+
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+
+
+
+</hibernate-configuration>
