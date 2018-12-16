@@ -1,53 +1,72 @@
 package entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Shop", schema = "DesktopPaymentSystem")
 public class ShopEntity {
-    private int shopId;
-    private String name;
-    private String address;
+   private int shopId;
 
-    public int getShopId() {
-        return shopId;
-    }
+   private String name;
+   private String address;
 
-    public void setShopId(int shopId) {
-        this.shopId = shopId;
-    }
+   @Id
+   @Column(name = "shopId", nullable = false)
+   @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY )
+   public int getShopId() {
+      return shopId;
+   }
 
-    public String getName() {
-        return name;
-    }
+   public void setShopId(int shopId) {
+      this.shopId = shopId;
+   }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+   @Basic
+   @Column(name = "name", nullable = false, length = 600)
+   public String getName() {
+      return name;
+   }
 
-    public String getAddress() {
-        return address;
-    }
+   public void setName(String name) {
+      this.name = name;
+   }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+   @Basic
+   @Column(name = "address", nullable = false, length = -1)
+   public String getAddress() {
+      return address;
+   }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+   public void setAddress(String address) {
+      this.address = address;
+   }
 
-        ShopEntity that = (ShopEntity) o;
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
 
-        if (shopId != that.shopId) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+      ShopEntity that = (ShopEntity) o;
 
-        return true;
-    }
+      if (shopId != that.shopId)
+         return false;
+      if (name != null ? !name.equals(that.name) : that.name != null)
+         return false;
+      if (address != null ?
+            !address.equals(that.address) :
+            that.address != null)
+         return false;
 
-    @Override
-    public int hashCode() {
-        int result = shopId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        return result;
-    }
+      return true;
+   }
+
+   @Override
+   public int hashCode() {
+      int result = shopId;
+      result = 31 * result + (name != null ? name.hashCode() : 0);
+      result = 31 * result + (address != null ? address.hashCode() : 0);
+      return result;
+   }
 }

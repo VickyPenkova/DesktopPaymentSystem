@@ -1,55 +1,71 @@
 package entities;
 
-import java.math.BigDecimal;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "Product", schema = "DesktopPaymentSystem", catalog = "")
 public class ProductEntity {
-    private int productId;
-    private String name;
-    private BigDecimal price;
+   private int productId;
+   private String name;
+   private double price;
 
-    public int getProductId() {
-        return productId;
-    }
+   @Id
+   @Column(name = "productId", nullable = false)
+   public int getProductId() {
+      return productId;
+   }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
+   public void setProductId(int productId) {
+      this.productId = productId;
+   }
 
-    public String getName() {
-        return name;
-    }
+   @Basic
+   @Column(name = "name", nullable = false, length = 600)
+   public String getName() {
+      return name;
+   }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+   public void setName(String name) {
+      this.name = name;
+   }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+   @Basic
+   @Column(name = "price", nullable = false, precision = 0)
+   public double getPrice() {
+      return price;
+   }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+   public void setPrice(double price) {
+      this.price = price;
+   }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
 
-        ProductEntity that = (ProductEntity) o;
+      ProductEntity that = (ProductEntity) o;
 
-        if (productId != that.productId) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (price != null ? !price.equals(that.price) : that.price != null) return false;
+      if (productId != that.productId)
+         return false;
+      if (Double.compare(that.price, price) != 0)
+         return false;
+      if (name != null ? !name.equals(that.name) : that.name != null)
+         return false;
 
-        return true;
-    }
+      return true;
+   }
 
-    @Override
-    public int hashCode() {
-        int result = productId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        return result;
-    }
+   @Override
+   public int hashCode() {
+      int result;
+      long temp;
+      result = productId;
+      result = 31 * result + (name != null ? name.hashCode() : 0);
+      temp = Double.doubleToLongBits(price);
+      result = 31 * result + (int) (temp ^ (temp >>> 32));
+      return result;
+   }
 }

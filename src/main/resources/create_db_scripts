@@ -1,0 +1,42 @@
+-- MySQL Language used
+CREATE TABLE CashReceipt
+(
+  cashReceiptId int NOT NULL AUTO_INCREMENT,
+  productId int NOT NULL,
+  cashierId int NOT NULL,
+  productsAmount int NOT NULL,
+  shopId int NOT NULL,
+  CONSTRAINT CashReceipt_Product_productId_fk FOREIGN KEY (productId) REFERENCES Product (productId),
+  CONSTRAINT CashReceipt_Shop_shopId_fk FOREIGN KEY (shopId) REFERENCES Shop (shopId),
+  CONSTRAINT CashReceipt_Cashier_cashierId_fk FOREIGN KEY (cashierId) REFERENCES Cashier (cashierId),
+  CONSTRAINT PRIMARY KEY(cashReceiptId)
+);
+
+CREATE TABLE Product (
+  productId int NOT NULL AUTO_INCREMENT,
+  name varchar(600) NOT NULL,
+  price double NOT NULL,
+  shopId int NOT NULL,
+  CONSTRAINT PRIMARY KEY(productId),
+  CONSTRAINT Product_Shop_shopId_fk FOREIGN KEY (shopId) REFERENCES Shop (shopId)
+);
+
+CREATE TABLE Cashier (
+  cashierId int NOT NULL AUTO_INCREMENT,
+  firstName varchar(600) NOT NULL,
+  lastName varchar(600) NOT NULL,
+  shopId int NOT NULL,
+  CONSTRAINT  PRIMARY KEY(cashierId),
+
+  CONSTRAINT Cashier_Shop_shopId_fk FOREIGN KEY (shopId) REFERENCES Shop (shopId)
+
+);
+
+-- auto-generated definition
+create table Shop
+(
+  shopId  int        not null AUTO_INCREMENT,
+  name    varchar(600) not null,
+  address text       not null,
+  CONSTRAINT primary key(shopId)
+);
