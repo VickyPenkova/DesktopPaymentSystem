@@ -1,16 +1,24 @@
 package entities;
 
+import jdk.management.resource.internal.inst.SocketRMHooks;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Cashier", schema = "DesktopPaymentSystem", catalog = "")
+@Table(name = "Cashier", schema = "DesktopPaymentSystem")
 public class CashierEntity {
    private int cashierId;
    private String firstName;
    private String lastName;
+   private int shopId;
+
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "shopId")
+   private ShopEntity shopEntity;
 
    @Id
    @Column(name = "cashierId", nullable = false)
+   @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
    public int getCashierId() {
       return cashierId;
    }
@@ -37,6 +45,20 @@ public class CashierEntity {
 
    public void setLastName(String lastName) {
       this.lastName = lastName;
+   }
+
+   @Basic
+   @Column(name = "shopId", nullable = false, length = 600)
+   public int getShopId() {
+      return shopId;
+   }
+
+   public void setShopId(int shopId) {
+      this.shopId = shopId;
+   }
+
+   public void setShopEntity(ShopEntity shopEntity) {
+      this.shopEntity = shopEntity;
    }
 
    @Override

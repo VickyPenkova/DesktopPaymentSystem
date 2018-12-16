@@ -3,11 +3,16 @@ package entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Product", schema = "DesktopPaymentSystem", catalog = "")
+@Table(name = "Product", schema = "DesktopPaymentSystem")
 public class ProductEntity {
    private int productId;
    private String name;
    private double price;
+   private int shopId;
+
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "shopId")
+   private ShopEntity shopEntity;
 
    @Id
    @Column(name = "productId", nullable = false)
@@ -37,6 +42,20 @@ public class ProductEntity {
 
    public void setPrice(double price) {
       this.price = price;
+   }
+
+   @Basic
+   @Column(name = "shopId", nullable = false, precision = 0)
+   public int getShopId() {
+      return shopId;
+   }
+
+   public void setShopId(int shopId) {
+      this.shopId = shopId;
+   }
+
+   public void setShopEntity(ShopEntity shopEntity) {
+      this.shopEntity = shopEntity;
    }
 
    @Override

@@ -1,15 +1,16 @@
 package sample;
 
+import entities.CashierEntity;
+import entities.ProductEntity;
 import entities.ShopEntity;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
-
-
-import static util.HibernateUtil.getEntityManager;
+import services.CashierService;
+import services.ProductService;
+import services.ShopService;
 
 public class Main extends Application {
 
@@ -21,25 +22,31 @@ public class Main extends Application {
    }
 
    public static void main(String[] args) {
-      //test entity manager
-      EntityManager entityMgr = getEntityManager();
-      entityMgr.getTransaction().begin();
+      ShopService shopService = new ShopService();
+      CashierService cashierService = new CashierService();
+      ProductService productService = new ProductService();
 
-      ShopEntity sp = new ShopEntity();
-      sp.setName("Shop1");
-      sp.setAddress("AddressOfShop1");
-      sp.setShopId(0);
-      entityMgr.persist(sp);
+      // TODO: Make constructor to call this service sfter in the java fx application
+      ShopEntity shop345 = shopService.addShop("345", "Mladost 4");
 
-      entityMgr.getTransaction().commit();
+      CashierEntity cashierPetia = cashierService
+            .addCashierInShop("Gery", "Petrova",
+                  shopService.getShopById(6).getShopId());
 
-      entityMgr.clear();
-      System.out.println("Record Successfully Inserted In The Database");
+//      ProductEntity apple = productService.addProductInShop("apple", 1.23,
+      //            shopService.getShopById(6).getShopId());
+
+      //org.hibernate.internal.ExceptionMapperStandardImpl mapManagedFlushFailure
+      //ERROR: HHH000346: Error during managed flush
+      //[Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect)
+      //Entity manager is not thread safe
+      //TODO: Find another way to use  EntityManager- https://www.objectdb.com/java/jpa/persistence/overview
+      ProductEntity cola = productService.addProductInShop("cola", 1.33,
+            shopService.getShopById(2).getShopId());
+
+      productService.registerProductWhenSelling(cola);
 
       launch(args);
    }
-
-
-
 
 }

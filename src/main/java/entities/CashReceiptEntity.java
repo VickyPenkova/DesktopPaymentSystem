@@ -10,6 +10,7 @@ public class CashReceiptEntity {
 
    @Id
    @Column(name = "cashReceiptId", nullable = false)
+   @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
    public int getCashReceiptId() {
       return cashReceiptId;
    }

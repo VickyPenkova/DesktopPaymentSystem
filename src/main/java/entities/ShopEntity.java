@@ -1,18 +1,34 @@
 package entities;
 
+import services.CashierService;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Shop", schema = "DesktopPaymentSystem")
 public class ShopEntity {
-   private int shopId;
+   protected int shopId;
 
    private String name;
    private String address;
 
+   @OneToMany(
+         cascade = CascadeType.ALL,
+         orphanRemoval = true
+   )
+   private List<CashierEntity> cashiers = new ArrayList<>();
+
+   @OneToMany(
+         cascade = CascadeType.ALL,
+         orphanRemoval = true
+   )
+   private List<ProductEntity> products = new ArrayList<>();
+
    @Id
    @Column(name = "shopId", nullable = false)
-   @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY )
+   @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
    public int getShopId() {
       return shopId;
    }
@@ -39,6 +55,26 @@ public class ShopEntity {
 
    public void setAddress(String address) {
       this.address = address;
+   }
+
+   public void addCashier(CashierEntity cashier) {
+      cashiers.add(cashier);
+      cashier.setShopEntity(this);
+   }
+
+   public void removeCashier(CashierEntity cashier) {
+      cashiers.remove(cashier);
+      cashier.setShopEntity(null);
+   }
+
+   public void addProduct(ProductEntity product) {
+      products.add(product);
+      product.setShopEntity(this);
+   }
+
+   public void removeProduct(ProductEntity product) {
+      products.remove(product);
+      product.setShopEntity(null);
    }
 
    @Override
