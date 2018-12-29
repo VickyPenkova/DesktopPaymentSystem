@@ -8,11 +8,34 @@ public class ProductEntity {
    private int productId;
    private String name;
    private double price;
-   private int shopId;
+   //private int shopId;
+   private int amount;
+   //   private CashReceiptEntity cashReceiptEntity;
+
+   private ShopEntity shop;
+
+   public ProductEntity(){
+
+   }
+
+   public ProductEntity(int productId, String name, double price, int amount,
+         ShopEntity shop) {
+      this.productId = productId;
+      this.name = name;
+      this.price = price;
+      this.amount = amount;
+      this.shop = shop;
+   }
 
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "shopId")
-   private ShopEntity shopEntity;
+   public ShopEntity getShop() {
+      return shop;
+   }
+
+   public void setShop(ShopEntity shop) {
+      this.shop = shop;
+   }
 
    @Id
    @Column(name = "productId", nullable = false)
@@ -45,18 +68,25 @@ public class ProductEntity {
    }
 
    @Basic
-   @Column(name = "shopId", nullable = false, precision = 0)
-   public int getShopId() {
-      return shopId;
+   @Column(name = "amount", nullable = false)
+   public int getAmount() {
+      return amount;
    }
 
-   public void setShopId(int shopId) {
-      this.shopId = shopId;
+   /**
+    * @param amountPerProduct - when not set the default value is 1
+    */
+   public void setAmount(int amountPerProduct) {
+      if(amountPerProduct > 1){
+         this.amount = amountPerProduct;
+      }else{
+         this.amount = 1;
+      }
    }
 
-   public void setShopEntity(ShopEntity shopEntity) {
-      this.shopEntity = shopEntity;
-   }
+//   public void setCashReceiptEntity(CashReceiptEntity cashRecipt) {
+//      this.cashReceiptEntity = cashRecipt;
+//   }
 
    @Override
    public boolean equals(Object o) {

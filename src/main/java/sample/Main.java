@@ -1,5 +1,6 @@
 package sample;
 
+import entities.CashReceiptEntity;
 import entities.CashierEntity;
 import entities.ProductEntity;
 import entities.ShopEntity;
@@ -8,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import services.CashReceiptService;
 import services.CashierService;
 import services.ProductService;
 import services.ShopService;
@@ -25,26 +27,48 @@ public class Main extends Application {
       ShopService shopService = new ShopService();
       CashierService cashierService = new CashierService();
       ProductService productService = new ProductService();
+      CashReceiptService cashReceiptService = new CashReceiptService();
 
-      // TODO: Make constructor to call this service sfter in the java fx application
+      // TODO: Make constructor to call this service after in the java fx application
       ShopEntity shop345 = shopService.addShop("345", "Mladost 4");
 
-      CashierEntity cashierPetia = cashierService
+      // Add Cashier
+      CashierEntity cashierGery = cashierService
             .addCashierInShop("Gery", "Petrova",
-                  shopService.getShopById(6).getShopId());
+                  shop345.getShopId());
 
-//      ProductEntity apple = productService.addProductInShop("apple", 1.23,
-      //            shopService.getShopById(6).getShopId());
+      // Add product in Shop
+      ProductEntity bread = productService
+            .addProductInShop("bread", 1.23, shop345, 7, 1);
 
-      //org.hibernate.internal.ExceptionMapperStandardImpl mapManagedFlushFailure
-      //ERROR: HHH000346: Error during managed flush
-      //[Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect)
-      //Entity manager is not thread safe
-      //TODO: Find another way to use  EntityManager- https://www.objectdb.com/java/jpa/persistence/overview
-      ProductEntity cola = productService.addProductInShop("cola", 1.33,
-            shopService.getShopById(2).getShopId());
+      ProductEntity apple = productService
+            .addProductInShop("apple", 1, shop345, 7, 2);
 
-      productService.registerProductWhenSelling(cola);
+      ProductEntity banana = productService
+            .addProductInShop("banana", 0.76, shop345, 7, 3);
+
+
+      boolean toSellBanana = productService
+            .markProductForSell(banana, 3, shop345);
+
+      boolean toSellApple = productService
+            .markProductForSell(apple, 2, shop345);
+
+      System.out.println(productService.getProductsToBeSold());
+
+      if (toSellBanana && toSellApple) {
+          CashReceiptEntity receipt = cashReceiptService
+               .generateCashReceipt(shop345, cashierGery,
+                     productService.getProductsToBeSold());
+
+         System.out.println(receipt);
+         System.out.println("----"+cashReceiptService.getAllProductsInReceipt(receipt));
+
+         productService.deleteAllProductsMarkedForSell();
+
+      }
+
+
 
       launch(args);
    }

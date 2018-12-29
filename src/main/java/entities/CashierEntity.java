@@ -1,8 +1,9 @@
 package entities;
 
-import jdk.management.resource.internal.inst.SocketRMHooks;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Cashier", schema = "DesktopPaymentSystem")
@@ -15,6 +16,9 @@ public class CashierEntity {
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "shopId")
    private ShopEntity shopEntity;
+
+   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+   private List<CashReceiptEntity> cashReceipts = new ArrayList<>();
 
    @Id
    @Column(name = "cashierId", nullable = false)
@@ -59,6 +63,24 @@ public class CashierEntity {
 
    public void setShopEntity(ShopEntity shopEntity) {
       this.shopEntity = shopEntity;
+   }
+
+   public ShopEntity shopEntity(){
+      return this.shopEntity;
+   }
+
+   public List<CashReceiptEntity> cashReceipts() {
+      return cashReceipts;
+   }
+
+   public void addCashReceipt(CashReceiptEntity cashReceipt, ShopEntity shop) {
+      cashReceipts.add(cashReceipt);
+      cashReceipt.setShopEntity(shop);
+   }
+
+   public void removeCashReceipt(CashReceiptEntity cashReceipt) {
+      cashReceipt.setShopEntity(null);
+      this.cashReceipts.remove(cashReceipt);
    }
 
    @Override

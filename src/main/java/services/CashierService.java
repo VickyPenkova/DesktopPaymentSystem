@@ -1,7 +1,6 @@
 package services;
 
 import entities.CashierEntity;
-import entities.ShopEntity;
 
 import javax.persistence.EntityManager;
 
@@ -12,7 +11,8 @@ public class CashierService {
    CashierEntity cashierEntity = new CashierEntity();
    ShopService shopService = new ShopService();
 
-   public CashierEntity addCashierInShop(String firstName, String lastName,int shopId){
+   public CashierEntity addCashierInShop(String firstName, String lastName,
+         int shopId) {
       try {
 
          entityMgr.getTransaction().begin();
@@ -33,6 +33,8 @@ public class CashierService {
 
          System.out.println("Record Successfully Inserted In The Database");
       }
+      // add cashier to shop entity list -> test it
+      shopService.addCashier(cashierEntity, shopService.getShopById(shopId));
 
       return cashierEntity;
    }

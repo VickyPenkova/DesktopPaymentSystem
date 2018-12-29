@@ -1,6 +1,6 @@
 package services;
 
-import entities.ProductEntity;
+import entities.CashierEntity;
 import entities.ShopEntity;
 
 import javax.persistence.EntityManager;
@@ -8,13 +8,11 @@ import javax.persistence.EntityManager;
 import static util.HibernateUtil.getEntityManager;
 
 public class ShopService {
-   EntityManager entityMgr = getEntityManager();
    ShopEntity sp = new ShopEntity();
 
    public ShopEntity addShop(String name, String address) {
-      // TODO: Pass entity manager instance as parameter. Is it possible?
+      EntityManager entityMgr = getEntityManager();
 
-      //entityMgr.clear();
       try {
 
          entityMgr.getTransaction().begin();
@@ -37,6 +35,8 @@ public class ShopService {
    }
 
    public ShopEntity getShopById(int shopId) {
+      EntityManager entityMgr = getEntityManager();
+
       try {
 
          entityMgr.getTransaction().begin();
@@ -50,7 +50,7 @@ public class ShopService {
       return sp;
    }
 
-   public void addProduct(ProductEntity productEntity){
-      sp.addProduct(productEntity);
+   public void addCashier(CashierEntity cashier, ShopEntity shop) {
+      sp.addCashier(cashier, shop);
    }
 }
