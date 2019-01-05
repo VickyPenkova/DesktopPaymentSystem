@@ -4,7 +4,6 @@ CREATE TABLE CashReceipt
   cashReceiptId int NOT NULL AUTO_INCREMENT,
   cashierId int NOT NULL,
   shopId int NOT NULL,
-  CONSTRAINT CashReceipt_Product_productId_fk FOREIGN KEY (productId) REFERENCES Product (productId),
   CONSTRAINT CashReceipt_Shop_shopId_fk FOREIGN KEY (shopId) REFERENCES Shop (shopId),
   CONSTRAINT CashReceipt_Cashier_cashierId_fk FOREIGN KEY (cashierId) REFERENCES Cashier (cashierId),
   CONSTRAINT PRIMARY KEY(cashReceiptId)
