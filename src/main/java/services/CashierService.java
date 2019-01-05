@@ -1,6 +1,8 @@
 package services;
 
 import entities.CashierEntity;
+import entities.ProductEntity;
+import entities.ShopEntity;
 
 import javax.persistence.EntityManager;
 
@@ -43,5 +45,23 @@ public class CashierService {
       shopService.addCashier(cashierEntity, shopService.getShopById(shopId));
 
       return cashierEntity;
+   }
+
+   public boolean ifCashierExists(int cashierId) {
+      EntityManager entityMgr = getEntityManager();
+      CashierEntity cashier;
+      try {
+         entityMgr.getTransaction().begin();
+         cashier = entityMgr.find(CashierEntity.class, cashierId);
+         if(cashier != null){
+            return true;
+         }
+         entityMgr.getTransaction().commit();
+      } finally {
+         if (entityMgr.getTransaction().isActive())
+            entityMgr.getTransaction().rollback();
+      }
+
+      return false;
    }
 }
