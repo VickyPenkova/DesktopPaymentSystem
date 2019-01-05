@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.menuController">
+   <children>
+      <MenuBar fx:id="mainMenuBar" layoutY="1.0" prefHeight="29.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Регистрация">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#addShop" text="Магазин" />
+                  <MenuItem mnemonicParsing="false" onAction="#addCashier" text="Касиер" />
+                  <MenuItem mnemonicParsing="false" onAction="#addProcuct" text="Продукт" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Пазаруване">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#shopping" text="Начало" />
+               </items></Menu>
+          <Menu mnemonicParsing="false" text="Справки">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#reference" text="Направи Справка" />
+               </items></Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
