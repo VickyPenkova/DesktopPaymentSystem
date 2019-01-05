@@ -14,6 +14,9 @@ import services.CashierService;
 import services.ProductService;
 import services.ShopService;
 
+/**
+ * Application starting point
+ */
 public class Main extends Application {
 
    @Override
@@ -24,18 +27,21 @@ public class Main extends Application {
    }
 
    public static void main(String[] args) {
+      /**
+       * Add services for Application
+       * ShopService, CashierService, ProductService, CashReceiptService
+       */
       ShopService shopService = new ShopService();
       CashierService cashierService = new CashierService();
       ProductService productService = new ProductService();
       CashReceiptService cashReceiptService = new CashReceiptService();
 
-      // TODO: Make constructor to call this service after in the java fx application
+      // Add Shop
       ShopEntity shop345 = shopService.addShop("345", "Mladost 4");
 
       // Add Cashier
       CashierEntity cashierGery = cashierService
-            .addCashierInShop("Gery", "Petrova",
-                  shop345.getShopId());
+            .addCashierInShop("Gery", "Petrova", shop345.getShopId());
 
       // Add product in Shop
       ProductEntity bread = productService
@@ -47,28 +53,32 @@ public class Main extends Application {
       ProductEntity banana = productService
             .addProductInShop("banana", 0.76, shop345, 7, 3);
 
-
+      // Check if product can be sold
       boolean toSellBanana = productService
             .markProductForSell(banana, 3, shop345);
 
       boolean toSellApple = productService
             .markProductForSell(apple, 2, shop345);
 
-      System.out.println(productService.getProductsToBeSold());
+      System.out.println(
+            "Products to be sold: " + productService.getProductsToBeSold());
 
       if (toSellBanana && toSellApple) {
-          CashReceiptEntity receipt = cashReceiptService
+         CashReceiptEntity receipt = cashReceiptService
                .generateCashReceipt(shop345, cashierGery,
                      productService.getProductsToBeSold());
 
-         System.out.println(receipt);
-         System.out.println("----"+cashReceiptService.getAllProductsInReceipt(receipt));
+         System.out.println("Receipt: " + receipt);
+         System.out.println("All products in cash receipt" + cashReceiptService
+               .getAllProductsInReceipt(receipt));
 
+         System.out.println("Now writing cash receipt to file ...");
+         cashReceiptService.writeCashReceiptToFile(receipt);
+         System.out.println("Files are save in the parent directory!");
+         System.out.println("Now deleting products ...");
          productService.deleteAllProductsMarkedForSell();
 
       }
-
-
 
       launch(args);
    }

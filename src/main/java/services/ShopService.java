@@ -6,10 +6,22 @@ import entities.ShopEntity;
 import javax.persistence.EntityManager;
 
 import static util.HibernateUtil.getEntityManager;
-
+/**
+ * ShopService class
+ * Used to access ShopEntities and talk to the database
+ * Functionality:
+ * 1. public getShopById
+ * 2. addCashier
+ * 3. addShop
+ */
 public class ShopService {
    ShopEntity sp = new ShopEntity();
 
+   /**
+    * @param name
+    * @param address
+    * @return
+    */
    public ShopEntity addShop(String name, String address) {
       EntityManager entityMgr = getEntityManager();
 
@@ -34,6 +46,10 @@ public class ShopService {
       return sp;
    }
 
+   /**
+    * @param shopId
+    * @return
+    */
    public ShopEntity getShopById(int shopId) {
       EntityManager entityMgr = getEntityManager();
 
@@ -50,6 +66,10 @@ public class ShopService {
       return sp;
    }
 
+   /**
+    * @param cashier
+    * @param shop
+    */
    public void addCashier(CashierEntity cashier, ShopEntity shop) {
       sp.addCashier(cashier, shop);
    }

@@ -7,10 +7,19 @@ import entities.ShopEntity;
 
 import javax.persistence.EntityManager;
 
+import java.io.*;
 import java.util.Map;
 
 import static util.HibernateUtil.getEntityManager;
 
+/**
+ * CashReceiptService class
+ * Used to access CashReceiptEntities and talk to the database
+ * Functionality:
+ * 1. public generateCashReceipt
+ * 2. public  writeCashReceiptToFile
+ * 3. private totalPriceOfCashReceipt
+ */
 public class CashReceiptService {
 
    public CashReceiptEntity generateCashReceipt(ShopEntity shop,
@@ -25,9 +34,11 @@ public class CashReceiptService {
 
          cashReceiptEntity.setCashierId(cashier.getCashierId());
          cashReceiptEntity.setShopId(shop.getShopId());
+         cashReceiptEntity.setShopEntity(shop);
          cashReceiptEntity
-               .setAmount(this.totalPriceOfCashReceipt(productsForCashReceipt));
-         System.out.println(cashReceiptEntity.products().toString());
+               .setTotalPrice(this.totalPriceOfCashReceipt(productsForCashReceipt));
+         cashReceiptEntity.initializeCashierEntity(cashier);
+
          entityMgr.persist(cashReceiptEntity);
 
          entityMgr.getTransaction().commit();
@@ -49,6 +60,23 @@ public class CashReceiptService {
       return receiptReference.products();
    }
 
+   public void writeCashReceiptToFile(CashReceiptEntity cashReceipt) {
+      String fileName = cashReceipt.getCashReceiptId() + ".txt";
+      try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
+
+         String content = cashReceipt.toString();
+
+         bw.write(content);
+
+         System.out.println("Done");
+
+      } catch (IOException e) {
+
+         e.printStackTrace();
+
+      }
+   }
+
    private double totalPriceOfCashReceipt(Map<ProductEntity, Integer> p) {
       double totalAmount = 0;
       for (Map.Entry<ProductEntity, Integer> entry : p.entrySet()) {
@@ -57,5 +85,4 @@ public class CashReceiptService {
 
       return totalAmount;
    }
-
 }

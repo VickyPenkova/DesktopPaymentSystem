@@ -4,21 +4,27 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * JPA ShopEntity class is a POJO class,
+ * i.e. an ordinary Java class that is marked
+ * (annotated) as having the ability to represent objects in the database.
+ * The class has shopId, name, address taken from the database
+ * Has relation with Cashier table as one to many,
+ * with CashReceipt table as one to many.
+ */
 @Entity
 @Table(name = "Shop", schema = "DesktopPaymentSystem")
 public class ShopEntity {
    private int shopId;
    private String name;
    private String address;
+   private List<ProductEntity> products = new ArrayList<>();
 
    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
    private List<CashierEntity> cashiers = new ArrayList<>();
 
-
    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
    private List<CashReceiptEntity> cashReceipts = new ArrayList<>();
-
-   private List<ProductEntity> products = new ArrayList<>();
 
    @OneToMany(mappedBy = "shop",  cascade = CascadeType.ALL, orphanRemoval = true)
    public List<ProductEntity> getProducts() {
@@ -32,11 +38,9 @@ public class ShopEntity {
    public void addProduct(ProductEntity product){
       products.add(product);
       product.setShop(this);
-
-      System.out.println(products.size());
    }
 
-   public  void removeProduct(ProductEntity product){
+   public void removeProduct(ProductEntity product){
       products.remove(product);
       product.setShop(null);
    }

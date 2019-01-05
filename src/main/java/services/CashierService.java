@@ -6,6 +6,12 @@ import javax.persistence.EntityManager;
 
 import static util.HibernateUtil.getEntityManager;
 
+/**
+ * CashierService class
+ * Used to access CashierEntities and talk to the database
+ * Functionality:
+ * 1. public addCashierInShop
+ */
 public class CashierService {
    EntityManager entityMgr = getEntityManager();
    CashierEntity cashierEntity = new CashierEntity();

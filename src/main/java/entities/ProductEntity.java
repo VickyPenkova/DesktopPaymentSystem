@@ -2,29 +2,23 @@ package entities;
 
 import javax.persistence.*;
 
+/**
+ * JPA ProductEntity class is a POJO class,
+ * i.e. an ordinary Java class that is marked
+ * (annotated) as having the ability to represent objects in the database.
+ * The class has productId, name, price, amount taken from the database
+ * Has relation with Shop table as many to one.
+ */
 @Entity
 @Table(name = "Product", schema = "DesktopPaymentSystem")
 public class ProductEntity {
    private int productId;
    private String name;
    private double price;
-   //private int shopId;
    private int amount;
-   //   private CashReceiptEntity cashReceiptEntity;
-
    private ShopEntity shop;
 
-   public ProductEntity(){
-
-   }
-
-   public ProductEntity(int productId, String name, double price, int amount,
-         ShopEntity shop) {
-      this.productId = productId;
-      this.name = name;
-      this.price = price;
-      this.amount = amount;
-      this.shop = shop;
+   public ProductEntity() {
    }
 
    @ManyToOne(fetch = FetchType.LAZY)
@@ -77,16 +71,12 @@ public class ProductEntity {
     * @param amountPerProduct - when not set the default value is 1
     */
    public void setAmount(int amountPerProduct) {
-      if(amountPerProduct > 1){
+      if (amountPerProduct > 1) {
          this.amount = amountPerProduct;
-      }else{
+      } else {
          this.amount = 1;
       }
    }
-
-//   public void setCashReceiptEntity(CashReceiptEntity cashRecipt) {
-//      this.cashReceiptEntity = cashRecipt;
-//   }
 
    @Override
    public boolean equals(Object o) {

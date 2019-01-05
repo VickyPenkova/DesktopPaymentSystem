@@ -1,9 +1,16 @@
 package entities;
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * JPA CashierEntity class is a POJO class,
+ * i.e. an ordinary Java class that is marked
+ * (annotated) as having the ability to represent objects in the database.
+ * The class has cashierId, firstName, lastName, shopId taken from the database
+ * Has relation with Shop table as many to one and with CashReceipt table as one to many.
+ */
 
 @Entity
 @Table(name = "Cashier", schema = "DesktopPaymentSystem")
@@ -65,7 +72,7 @@ public class CashierEntity {
       this.shopEntity = shopEntity;
    }
 
-   public ShopEntity shopEntity(){
+   public ShopEntity shopEntity() {
       return this.shopEntity;
    }
 

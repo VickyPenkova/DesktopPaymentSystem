@@ -5,13 +5,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * JPA CashReceiptEntity class is a POJO class,
+ * i.e. an ordinary Java class that is marked
+ * (annotated) as having the ability to represent objects in the database.
+ * The class has cashReceiptId, cashierId, shopId, totalPrice
+ * taken from the database
+ * Has relation with Shop table as many to one.
+ */
 @Entity
 @Table(name = "CashReceipt", schema = "DesktopPaymentSystem")
 public class CashReceiptEntity {
    private int cashReceiptId;
    private int cashierId;
    private int shopId;
-   private double totalAmount;
+   private double totalPrice;
 
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "shopId")
@@ -49,16 +57,20 @@ public class CashReceiptEntity {
 
    @Basic
    @Column(name = "totalPrice", nullable = false)
-   public double getAmount() {
-      return totalAmount;
+   public double getTotalPrice() {
+      return totalPrice;
    }
 
-   public void setAmount(double amount) {
-      this.totalAmount = amount;
+   public void setTotalPrice(double amount) {
+      this.totalPrice = amount;
    }
 
    public void initializeProducts(Map<ProductEntity, Integer> products) {
       this.products = products;
+   }
+
+   public void initializeCashierEntity(CashierEntity cashierEntity) {
+      this.cashierEntity = cashierEntity;
    }
 
    public Map<ProductEntity, Integer> products() {
@@ -87,15 +99,28 @@ public class CashReceiptEntity {
          return false;
       CashReceiptEntity that = (CashReceiptEntity) o;
       return cashReceiptId == that.cashReceiptId && cashierId == that.cashierId
-            && shopId == that.shopId && Double.compare(that.totalAmount, totalAmount) == 0
-            && Objects.equals(shopEntity, that.shopEntity) && Objects
+            && shopId == that.shopId
+            && Double.compare(that.totalPrice, totalPrice) == 0 && Objects
+            .equals(shopEntity, that.shopEntity) && Objects
             .equals(products, that.products) && Objects
             .equals(cashierEntity, that.cashierEntity);
    }
 
    @Override
-   public int hashCode() {
-      return Objects.hash(cashReceiptId, cashierId, shopId, totalAmount, shopEntity,
-            products, cashierEntity);
+   public String toString() {
+      return "ID of cash receipt: " + this.getCashierId() + "\nID of Shop: "
+            + this.getShopId() + "\nName of Shop: " + this.shopEntity.getName()
+            + "\nAddress of Shop: " + this.shopEntity.getAddress()
+            + "\nID of Cashier: " + this.getCashierId() + "\nName of Cashier: "
+            + this.cashierEntity.getFirstName() + " " + this.cashierEntity
+            .getLastName() + "\nTotal price: " + this.totalPrice;
    }
+
+   @Override
+   public int hashCode() {
+      return Objects
+            .hash(cashReceiptId, cashierId, shopId, totalPrice, shopEntity,
+                  products, cashierEntity);
+   }
+
 }
