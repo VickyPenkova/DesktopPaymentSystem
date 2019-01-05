@@ -4,11 +4,11 @@ import entities.CashierEntity;
 import entities.ShopEntity;
 
 import javax.persistence.EntityManager;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static util.HibernateUtil.getEntityManager;
+
 /**
  * ShopService class
  * Used to access ShopEntities and talk to the database
@@ -58,7 +58,9 @@ public class ShopService {
 
          entityMgr.getTransaction().begin();
          sp = entityMgr.find(ShopEntity.class, shopId);
-
+         if (sp == null) {
+            System.out.println("No such shop!");
+         }
          entityMgr.getTransaction().commit();
       } finally {
          if (entityMgr.getTransaction().isActive())
@@ -76,10 +78,10 @@ public class ShopService {
       sp.addCashier(cashier, shop);
    }
 
-   public ArrayList<ShopEntity> getAllShops(){
+   public ArrayList<ShopEntity> getAllShops() {
       EntityManager entityMgr = getEntityManager();
-      List<ShopEntity> listShops = entityMgr.createQuery("from ShopEntity",
-            ShopEntity.class).getResultList();
+      List<ShopEntity> listShops = entityMgr
+            .createQuery("from ShopEntity", ShopEntity.class).getResultList();
 
       return new ArrayList<>(listShops);
    }

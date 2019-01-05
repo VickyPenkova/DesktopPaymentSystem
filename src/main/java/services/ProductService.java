@@ -1,12 +1,10 @@
 package services;
 
-import entities.CashReceiptEntity;
 import entities.ProductEntity;
 import entities.ShopEntity;
 
 import javax.persistence.EntityManager;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static util.HibernateUtil.getEntityManager;
@@ -79,10 +77,14 @@ public class ProductService {
    public boolean markProductForSell(ProductEntity productToBeSold, int count,
          ShopEntity shopReference) {
       boolean toSell = false;
-
       EntityManager entityMgr = getEntityManager();
       ShopEntity shop = entityMgr
             .find(ShopEntity.class, shopReference.getShopId());
+
+      if(shop == null){
+         System.out.println("No such shop!");
+         return false;
+      }
 
       if (shop.getProducts().size() == 0) {
          System.out.println(
@@ -123,20 +125,23 @@ public class ProductService {
       try {
          ProductEntity toReduce = entityMgr
                .find(ProductEntity.class, productToDelete.getProductId());
-         if (productToDelete.getAmount() > amount) {
+         if (toReduce != null) {
+            if (productToDelete.getAmount() > amount) {
 
-            entityMgr.getTransaction().begin();
-            toReduce.setAmount(toReduce.getAmount() - amount);
-            entityMgr.getTransaction().commit();
+               entityMgr.getTransaction().begin();
+               toReduce.setAmount(toReduce.getAmount() - amount);
+               entityMgr.getTransaction().commit();
 
-            System.out.println(toReduce.getAmount());
-         } else if (productToDelete.getAmount() == amount) {
-            entityMgr.getTransaction().begin();
-            entityMgr.remove(toReduce);
-            entityMgr.getTransaction().commit();
+               System.out.println(toReduce.getAmount());
+            } else if (productToDelete.getAmount() == amount) {
+               entityMgr.getTransaction().begin();
+               entityMgr.remove(toReduce);
+               entityMgr.getTransaction().commit();
+            }
+            System.out.println("Record Successfully Removed In The Database");
          }
+         System.out.println("Cannot delete product!");
 
-         System.out.println("Record Successfully Removed In The Database");
       } finally {
          if (entityMgr.getTransaction().isActive())
             entityMgr.getTransaction().rollback();
@@ -166,10 +171,11 @@ public class ProductService {
 
          entityMgr.getTransaction().begin();
          shop = entityMgr.find(ShopEntity.class, shopId);
-         for (ProductEntity product:shop.getProducts()
-              ) {
-            if(productId == product.getProductId()){
-               return true;
+         if (shop != null) {
+            for (ProductEntity product : shop.getProducts()) {
+               if (productId == product.getProductId()) {
+                  return true;
+               }
             }
          }
          entityMgr.getTransaction().commit();
@@ -185,10 +191,8 @@ public class ProductService {
       EntityManager entityMgr = getEntityManager();
       ProductEntity productEntity;
       try {
-
          entityMgr.getTransaction().begin();
          productEntity = entityMgr.find(ProductEntity.class, productId);
-
          entityMgr.getTransaction().commit();
       } finally {
          if (entityMgr.getTransaction().isActive())

@@ -1,8 +1,6 @@
 package services;
 
 import entities.CashierEntity;
-import entities.ProductEntity;
-import entities.ShopEntity;
 
 import javax.persistence.EntityManager;
 

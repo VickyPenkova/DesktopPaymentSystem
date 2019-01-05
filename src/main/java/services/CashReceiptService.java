@@ -6,9 +6,9 @@ import entities.ProductEntity;
 import entities.ShopEntity;
 
 import javax.persistence.EntityManager;
-
-import java.io.*;
-import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -88,15 +88,18 @@ public class CashReceiptService {
       return listCashReceipt.size();
    }
 
-   public int getCountOfGeneratedCashReceiptsIssuedFromCashier(int certainCashierId) {
+   public int getCountOfGeneratedCashReceiptsIssuedFromCashier(
+         int certainCashierId) {
       EntityManager entityMgr = getEntityManager();
       List<CashReceiptEntity> listCashReceipt = entityMgr
             .createQuery("from CashReceiptEntity ", CashReceiptEntity.class)
             .getResultList();
       int counter = 0;
-      for (CashReceiptEntity cashReceipt : listCashReceipt) {
-         if(cashReceipt.getCashierId() == certainCashierId){
-            counter++;
+      if (listCashReceipt != null) {
+         for (CashReceiptEntity cashReceipt : listCashReceipt) {
+            if (cashReceipt.getCashierId() == certainCashierId) {
+               counter++;
+            }
          }
       }
 
@@ -109,8 +112,10 @@ public class CashReceiptService {
             .createQuery("from CashReceiptEntity ", CashReceiptEntity.class)
             .getResultList();
       double total = 0;
-      for (CashReceiptEntity cashReceipt : listCashReceipt) {
-         total += cashReceipt.getTotalPrice();
+      if (listCashReceipt != null) {
+         for (CashReceiptEntity cashReceipt : listCashReceipt) {
+            total += cashReceipt.getTotalPrice();
+         }
       }
       return total;
    }
