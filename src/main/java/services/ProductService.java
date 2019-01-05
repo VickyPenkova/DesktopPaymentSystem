@@ -1,10 +1,12 @@
 package services;
 
+import entities.CashReceiptEntity;
 import entities.ProductEntity;
 import entities.ShopEntity;
 
 import javax.persistence.EntityManager;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static util.HibernateUtil.getEntityManager;
@@ -152,7 +154,34 @@ public class ProductService {
       }
    }
 
-   public ProductEntity getProductById(int productId) {
+   /**
+    * @param productId
+    * @param shopId
+    * @return boolean
+    */
+   public boolean ifProductExistsInShop(int productId, int shopId) {
+      EntityManager entityMgr = getEntityManager();
+      ShopEntity shop;
+      try {
+
+         entityMgr.getTransaction().begin();
+         shop = entityMgr.find(ShopEntity.class, shopId);
+         for (ProductEntity product:shop.getProducts()
+              ) {
+            if(productId == product.getProductId()){
+               return true;
+            }
+         }
+         entityMgr.getTransaction().commit();
+      } finally {
+         if (entityMgr.getTransaction().isActive())
+            entityMgr.getTransaction().rollback();
+      }
+
+      return false;
+   }
+
+   public ProductEntity getProductById(int productId, ShopEntity shop) {
       EntityManager entityMgr = getEntityManager();
       ProductEntity productEntity;
       try {
@@ -167,5 +196,4 @@ public class ProductService {
       }
       return productEntity;
    }
-
 }

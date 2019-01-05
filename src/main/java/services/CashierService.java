@@ -14,11 +14,11 @@ import static util.HibernateUtil.getEntityManager;
  */
 public class CashierService {
    EntityManager entityMgr = getEntityManager();
-   CashierEntity cashierEntity = new CashierEntity();
    ShopService shopService = new ShopService();
 
    public CashierEntity addCashierInShop(String firstName, String lastName,
          int shopId) {
+      CashierEntity cashierEntity = new CashierEntity();
       try {
 
          entityMgr.getTransaction().begin();

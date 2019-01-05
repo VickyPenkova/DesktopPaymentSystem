@@ -8,6 +8,8 @@ import entities.ShopEntity;
 import javax.persistence.EntityManager;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static util.HibernateUtil.getEntityManager;
@@ -35,8 +37,8 @@ public class CashReceiptService {
          cashReceiptEntity.setCashierId(cashier.getCashierId());
          cashReceiptEntity.setShopId(shop.getShopId());
          cashReceiptEntity.setShopEntity(shop);
-         cashReceiptEntity
-               .setTotalPrice(this.totalPriceOfCashReceipt(productsForCashReceipt));
+         cashReceiptEntity.setTotalPrice(
+               this.totalPriceOfCashReceipt(productsForCashReceipt));
          cashReceiptEntity.initializeCashierEntity(cashier);
 
          entityMgr.persist(cashReceiptEntity);
@@ -77,9 +79,41 @@ public class CashReceiptService {
       }
    }
 
-//   public int cashReceiptCount(){
-//
-//   }
+   public int getCountOfGeneratedCashReceipts() {
+      EntityManager entityMgr = getEntityManager();
+      List<CashReceiptEntity> listCashReceipt = entityMgr
+            .createQuery("from CashReceiptEntity ", CashReceiptEntity.class)
+            .getResultList();
+
+      return listCashReceipt.size();
+   }
+
+   public int getCountOfGeneratedCashReceiptsIssuedFromCashier(int certainCashierId) {
+      EntityManager entityMgr = getEntityManager();
+      List<CashReceiptEntity> listCashReceipt = entityMgr
+            .createQuery("from CashReceiptEntity ", CashReceiptEntity.class)
+            .getResultList();
+      int counter = 0;
+      for (CashReceiptEntity cashReceipt : listCashReceipt) {
+         if(cashReceipt.getCashierId() == certainCashierId){
+            counter++;
+         }
+      }
+
+      return counter;
+   }
+
+   public double getTotalPriceOfAllCashReceipts() {
+      EntityManager entityMgr = getEntityManager();
+      List<CashReceiptEntity> listCashReceipt = entityMgr
+            .createQuery("from CashReceiptEntity ", CashReceiptEntity.class)
+            .getResultList();
+      double total = 0;
+      for (CashReceiptEntity cashReceipt : listCashReceipt) {
+         total += cashReceipt.getTotalPrice();
+      }
+      return total;
+   }
 
    private double totalPriceOfCashReceipt(Map<ProductEntity, Integer> p) {
       double totalAmount = 0;

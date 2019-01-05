@@ -18,8 +18,6 @@ import static util.HibernateUtil.getEntityManager;
  * 3. addShop
  */
 public class ShopService {
-   ShopEntity sp = new ShopEntity();
-
    /**
     * @param name
     * @param address
@@ -27,7 +25,7 @@ public class ShopService {
     */
    public ShopEntity addShop(String name, String address) {
       EntityManager entityMgr = getEntityManager();
-
+      ShopEntity sp = new ShopEntity();
       try {
 
          entityMgr.getTransaction().begin();
@@ -55,7 +53,7 @@ public class ShopService {
     */
    public ShopEntity getShopById(int shopId) {
       EntityManager entityMgr = getEntityManager();
-
+      ShopEntity sp;
       try {
 
          entityMgr.getTransaction().begin();
@@ -74,6 +72,7 @@ public class ShopService {
     * @param shop
     */
    public void addCashier(CashierEntity cashier, ShopEntity shop) {
+      ShopEntity sp = new ShopEntity();
       sp.addCashier(cashier, shop);
    }
 
