@@ -181,7 +181,7 @@ public class ProductService {
       return false;
    }
 
-   public ProductEntity getProductById(int productId, ShopEntity shop) {
+   public ProductEntity getProductById(int productId) {
       EntityManager entityMgr = getEntityManager();
       ProductEntity productEntity;
       try {

@@ -64,4 +64,20 @@ public class CashierService {
 
       return false;
    }
+
+   public CashierEntity getCashierById(int cashierId) {
+      EntityManager entityMgr = getEntityManager();
+      CashierEntity cashierEntity;
+      try {
+
+         entityMgr.getTransaction().begin();
+         cashierEntity = entityMgr.find(CashierEntity.class, cashierId);
+
+         entityMgr.getTransaction().commit();
+      } finally {
+         if (entityMgr.getTransaction().isActive())
+            entityMgr.getTransaction().rollback();
+      }
+      return cashierEntity;
+   }
 }

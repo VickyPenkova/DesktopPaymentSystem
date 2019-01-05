@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="getPr">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="ifCashierExists">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/CashReceiptService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/CashReceiptService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/services/CashierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/CashierService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/services/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/ShopService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/ShopService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entities/CashierEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/CashierEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entities/ProductEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/ProductEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/entities/ShopEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/ShopEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample/Main.class" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -169,16 +162,16 @@
           <entry key="create_db_scripts" value="47" />
           <entry key="dummy" value="13" />
           <entry key="fxml" value="2" />
-          <entry key="java" value="16454" />
+          <entry key="java" value="16566" />
           <entry key="sql" value="1265" />
-          <entry key="txt" value="600" />
+          <entry key="txt" value="628" />
           <entry key="xml" value="881" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="16454" />
-          <entry key="PLAIN_TEXT" value="613" />
+          <entry key="JAVA" value="16566" />
+          <entry key="PLAIN_TEXT" value="641" />
           <entry key="SQL" value="88" />
           <entry key="Scratch" value="1224" />
           <entry key="XML" value="883" />
@@ -215,8 +208,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="105" column="91" selection-start-line="105" selection-start-column="91" selection-end-line="105" selection-end-column="91" />
+            <state relative-caret-position="932">
+              <caret line="99" column="56" selection-start-line="99" selection-start-column="45" selection-end-line="99" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -248,11 +241,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/services/ProductService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="161" column="39" selection-start-line="161" selection-start-column="39" selection-end-line="161" selection-end-column="39" />
+            <state relative-caret-position="280">
+              <caret line="197" column="4" lean-forward="true" selection-start-line="183" selection-start-column="3" selection-end-line="197" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -260,11 +253,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/services/CashierService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-137">
-              <caret line="15" column="48" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
+            <state relative-caret-position="230">
+              <caret line="73" column="53" selection-start-line="73" selection-start-column="53" selection-end-line="73" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -331,10 +324,10 @@
         <option value="$PROJECT_DIR$/src/main/java/entities/ShopEntity.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/bee65a11-2398-4d91-bf83-a5df029a5f55/console.sql" />
         <option value="$PROJECT_DIR$/src/main/java/services/CashReceiptService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/services/CashierService.java" />
         <option value="$PROJECT_DIR$/src/main/java/services/ShopService.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/services/ProductService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/services/CashierService.java" />
       </list>
     </option>
   </component>
@@ -501,7 +494,7 @@
     <property name="SearchEverywhereHistoryKey" value="cashReceiptByCashierId&#9;PSI&#9;JAVA://entities.CashierEntity#cashReceiptByCashierId" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546708342214" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546710367164" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/Edit As Language" value="GenericSQL" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect" value="MySQL&#10;TSQL" />
     <property name="database.console.LAST_STATE" value="false" />
@@ -629,7 +622,7 @@
       <workItem from="1545473226475" duration="14882000" />
       <workItem from="1545553688623" duration="33171000" />
       <workItem from="1546083696248" duration="19609000" />
-      <workItem from="1546688809549" duration="15206000" />
+      <workItem from="1546688809549" duration="16908000" />
     </task>
     <task id="LOCAL-00001" summary="Updating project support framework and database configuration">
       <created>1541286110096</created>
@@ -701,11 +694,25 @@
       <option name="project" value="LOCAL" />
       <updated>1546704706905</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="ifProductExistsInShop">
+      <created>1546708359758</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1546708359758</updated>
+    </task>
+    <task id="LOCAL-00012" summary="ifCashierExists">
+      <created>1546709355725</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1546709355725</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="157892000" />
+    <option name="totallyTimeSpent" value="159594000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="717" extended-state="0" />
@@ -770,7 +777,9 @@
     <MESSAGE value="adding missing files" />
     <MESSAGE value="Code improvements and javadoc" />
     <MESSAGE value="ShopService get all shops" />
-    <option name="LAST_COMMIT_MESSAGE" value="ShopService get all shops" />
+    <MESSAGE value="ifProductExistsInShop" />
+    <MESSAGE value="ifCashierExists" />
+    <option name="LAST_COMMIT_MESSAGE" value="ifCashierExists" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1120,30 +1129,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/services/CashierService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-137">
-          <caret line="15" column="48" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/bee65a11-2398-4d91-bf83-a5df029a5f55/console.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" selection-start-line="10" selection-end-line="10" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="105" column="91" selection-start-line="105" selection-start-column="91" selection-end-line="105" selection-end-column="91" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1177,10 +1166,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="932">
+          <caret line="99" column="56" selection-start-line="99" selection-start-column="45" selection-end-line="99" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/services/ProductService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="161" column="39" selection-start-line="161" selection-start-column="39" selection-end-line="161" selection-end-column="39" />
+        <state relative-caret-position="280">
+          <caret line="197" column="4" lean-forward="true" selection-start-line="183" selection-start-column="3" selection-end-line="197" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/services/CashierService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="73" column="53" selection-start-line="73" selection-start-column="53" selection-end-line="73" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
