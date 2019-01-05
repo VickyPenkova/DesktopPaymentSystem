@@ -80,6 +80,8 @@ public class Main extends Application {
 
       }
 
+      System.out.println(shopService.getAllShops());
+
       launch(args);
    }
 

@@ -77,6 +77,10 @@ public class CashReceiptService {
       }
    }
 
+//   public int cashReceiptCount(){
+//
+//   }
+
    private double totalPriceOfCashReceipt(Map<ProductEntity, Integer> p) {
       double totalAmount = 0;
       for (Map.Entry<ProductEntity, Integer> entry : p.entrySet()) {

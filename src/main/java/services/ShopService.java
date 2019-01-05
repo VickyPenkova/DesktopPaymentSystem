@@ -5,6 +5,9 @@ import entities.ShopEntity;
 
 import javax.persistence.EntityManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static util.HibernateUtil.getEntityManager;
 /**
  * ShopService class
@@ -72,5 +75,13 @@ public class ShopService {
     */
    public void addCashier(CashierEntity cashier, ShopEntity shop) {
       sp.addCashier(cashier, shop);
+   }
+
+   public ArrayList<ShopEntity> getAllShops(){
+      EntityManager entityMgr = getEntityManager();
+      List<ShopEntity> listShops = entityMgr.createQuery("from ShopEntity",
+            ShopEntity.class).getResultList();
+
+      return new ArrayList<>(listShops);
    }
 }
