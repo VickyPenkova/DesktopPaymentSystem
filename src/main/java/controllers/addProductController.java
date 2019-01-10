@@ -61,8 +61,11 @@ public class addProductController implements Initializable {
         }
         else{
             ProductService productService = new ProductService();
+            if(!productService.ifProductExists(Integer.parseInt(id.getText()))){
+                message.setText("Продуктът с това ID същестува!");
+            }
 
-            if(productService.ifProductExistsInShop(Integer.parseInt(id.getText()),
+            else if(productService.ifProductExistsInShop(Integer.parseInt(id.getText()),
                     ((ShopEntity)shops.getSelectionModel().getSelectedItem()).getShopId())){
 
                 message.setText("Продуктът с това ID същестува в този магазин!");

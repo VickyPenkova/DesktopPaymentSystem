@@ -23,6 +23,7 @@ public class ShopEntity {
    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
    private List<CashierEntity> cashiers = new ArrayList<>();
 
+
    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
    private List<CashReceiptEntity> cashReceipts = new ArrayList<>();
 

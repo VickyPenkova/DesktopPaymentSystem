@@ -6,25 +6,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="controllers.getReferenceController" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.getReferenceController">
    <children>
       <fx:include source="menu.fxml" />
-      <Button fx:id="btnRederence" layoutX="199.0" layoutY="201.0" mnemonicParsing="false" text="Направи справка">
+      <Button fx:id="btnReference" layoutX="225.0" layoutY="174.0" mnemonicParsing="false" onAction="#getReference" text="Направи справка">
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>
       </Button>
-      <Text fx:id="answer" layoutX="135.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Натиснете бутона, за да получите справка">
+      <Text fx:id="answer" layoutX="161.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Натиснете бутона, за да получите справка">
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>
       </Text>
-      <ComboBox fx:id="ask" layoutX="104.0" layoutY="127.0" prefHeight="26.0" prefWidth="412.0" />
-      <Text layoutX="170.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Изберете вида на справката">
+      <ComboBox fx:id="ask" layoutX="94.0" layoutY="122.0" prefHeight="26.0" prefWidth="412.0" />
+      <Text layoutX="196.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Изберете вида на справката">
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>
       </Text>
+      <ComboBox fx:id="stores" layoutX="94.0" layoutY="231.0" onAction="#somethingIsSelected" prefHeight="26.0" prefWidth="412.0" />
+      <ComboBox fx:id="cashiers" layoutX="94.0" layoutY="286.0" onAction="#getReceiptCount" prefHeight="26.0" prefWidth="412.0" />
    </children>
 </AnchorPane>

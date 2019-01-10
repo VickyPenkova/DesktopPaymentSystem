@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -9,10 +10,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.shoppingStepOneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.shoppingController">
    <children>
       <fx:include source="menu.fxml" />
-      <Text layoutX="187.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Моля въведете касиерско ID">
+      <Text fx:id="bigLabel" layoutX="187.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Моля въведете касиерско ID">
          <font>
             <Font name="Segoe UI" size="18.0" />
          </font>
@@ -38,14 +39,14 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Product ID">
+            <Text fx:id="label1" strokeType="OUTSIDE" strokeWidth="0.0" text="Product ID">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
             <TextField fx:id="productID" GridPane.columnIndex="1" />
             <TextField fx:id="productAmount" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" GridPane.rowIndex="1">
+            <Text fx:id="label2" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
@@ -67,5 +68,16 @@
             <Font name="Segoe UI" size="14.0" />
          </font>
       </Text>
+      <ListView fx:id="cashRecieptList" layoutX="48.0" layoutY="73.0" prefHeight="293.0" prefWidth="538.0" />
+      <Button fx:id="btnPrint" layoutX="216.0" layoutY="426.0" mnemonicParsing="false" onAction="#printReciept" text="Отпечатай бележка">
+         <font>
+            <Font name="Segoe UI" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnNewSale" layoutX="424.0" layoutY="485.0" mnemonicParsing="false" onAction="#backToStart" prefHeight="31.0" prefWidth="189.0" text="Нова продажба">
+         <font>
+            <Font name="Segoe UI" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

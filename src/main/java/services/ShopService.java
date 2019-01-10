@@ -4,6 +4,7 @@ import entities.CashierEntity;
 import entities.ShopEntity;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +77,24 @@ public class ShopService {
    public void addCashier(CashierEntity cashier, ShopEntity shop) {
       ShopEntity sp = new ShopEntity();
       sp.addCashier(cashier, shop);
+   }
+
+   public List<CashierEntity> getCashiers(int givenID){
+      EntityManager entityMgr = getEntityManager();
+      List<CashierEntity> cashierEntityList;
+      try {
+         Query query = entityMgr.
+                 createQuery("Select c from CashierEntity c where c.cashierId=?1");
+         query.setParameter(1,givenID);
+
+         cashierEntityList=(List<CashierEntity>)query.getResultList();
+         System.out.println(cashierEntityList);
+
+      } finally {
+         if (entityMgr.getTransaction().isActive())
+            entityMgr.getTransaction().rollback();
+      }
+      return cashierEntityList;
    }
 
    public ArrayList<ShopEntity> getAllShops() {

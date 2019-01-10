@@ -34,7 +34,7 @@ public class ProductService {
     * @return ProductEntity generated
     */
    public ProductEntity addProductInShop(String name, double price,
-         ShopEntity shop, int amount, int productId) {
+                                         ShopEntity shop, int amount, int productId) {
       EntityManager entityMgr = getEntityManager();
       ProductEntity productEntity = new ProductEntity();
       try {
@@ -47,11 +47,11 @@ public class ProductService {
          productEntity.setProductId(productId);
 
          ShopEntity shopEntity = entityMgr
-               .find(ShopEntity.class, shop.getShopId());
+                 .find(ShopEntity.class, shop.getShopId());
          shopEntity.addProduct(productEntity);
 
          System.out.println(
-               "Size in addProductInShop: " + shopEntity.getProducts().size());
+                 "Size in addProductInShop: " + shopEntity.getProducts().size());
          System.out.println(shopEntity.getProducts());
 
          entityMgr.persist(productEntity);
@@ -68,52 +68,60 @@ public class ProductService {
    }
 
    /**
+    * @param givenId
+    * @return - true if the product exists
+    */
+   public boolean ifProductExists(int givenId){
+      EntityManager entityMgr = getEntityManager();
+      if(entityMgr.find(ProductEntity.class,givenId) == null)
+         return true;
+      else return false;
+   }
+
+   /**
     * @param productToBeSold
     * @param count           - the number of productsForCashReceipt to be sold
     * @param shopReference   - the shop that is selling
-    * @return - true or false is the product can be sold
+    * @return - true or false if the product can be sold
     */
 
-   public boolean markProductForSell(ProductEntity productToBeSold, int count,
-         ShopEntity shopReference) {
-      boolean toSell = false;
+   public void markProductForSell(ProductEntity productToBeSold, int count,
+                                  ShopEntity shopReference) {
       EntityManager entityMgr = getEntityManager();
       ShopEntity shop = entityMgr
-            .find(ShopEntity.class, shopReference.getShopId());
-
+              .find(ShopEntity.class, shopReference.getShopId());
+      entityMgr.getTransaction().begin();
       if(shop == null){
          System.out.println("No such shop!");
-         return false;
+         return;
       }
 
       if (shop.getProducts().size() == 0) {
          System.out.println(
-               "Not enough products for CashReceipt in the shop " + shop
-                     .getName());
+                 "Not enough products for CashReceipt in the shop " + shop
+                         .getName());
       } else {
          if (count > productToBeSold.getAmount()) {
             System.out.println(
-                  "Not enough productsForCashReceipt of this type in the shop "
-                        + shop.getName());
+                    "Not enough productsForCashReceipt of this type in the shop "
+                            + shop.getName());
          } else if (count <= productToBeSold.getAmount()) {
             // Check for the same products already scanned
             boolean markerForAdd = false;
             for (ProductEntity items : productsForCashReceipt.keySet()) {
                if (productToBeSold.equals(items)) {
-                  int newAmount = productToBeSold.getAmount();
-                  productToBeSold.setAmount(newAmount + count);
+                  int newAmount = productsForCashReceipt.get(items) + count;
+                  productsForCashReceipt.put(items,newAmount);
                   markerForAdd = true;
                }
             }
             if (!markerForAdd) {
                productsForCashReceipt.put(productToBeSold, count);
             }
-
-            toSell = true;
          }
       }
-
-      return toSell;
+      if (entityMgr.getTransaction().isActive())
+         entityMgr.getTransaction().rollback();
    }
 
    /**
@@ -124,7 +132,7 @@ public class ProductService {
       EntityManager entityMgr = getEntityManager();
       try {
          ProductEntity toReduce = entityMgr
-               .find(ProductEntity.class, productToDelete.getProductId());
+                 .find(ProductEntity.class, productToDelete.getProductId());
          if (toReduce != null) {
             if (productToDelete.getAmount() > amount) {
 
@@ -154,7 +162,7 @@ public class ProductService {
     */
    public void deleteAllProductsMarkedForSell() {
       for (Map.Entry<ProductEntity, Integer> entry : productsForCashReceipt
-            .entrySet()) {
+              .entrySet()) {
          deleteProduct(entry.getKey(), entry.getValue());
       }
    }

@@ -71,7 +71,7 @@ public class menuController implements Initializable {
 
     public void shopping(ActionEvent actionEvent) {
         try {
-            Parent addChildView = FXMLLoader.load(getClass().getClassLoader().getResource("view/shoppingStepOne.fxml"));
+            Parent addChildView = FXMLLoader.load(getClass().getClassLoader().getResource("view/shopping.fxml"));
             Scene addChildScene = new Scene(addChildView);
 
             Stage window = (Stage)mainMenuBar.getScene().getWindow();

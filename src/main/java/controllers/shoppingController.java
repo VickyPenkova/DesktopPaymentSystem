@@ -1,28 +1,32 @@
 package controllers;
 
 import entities.CashReceiptEntity;
-import entities.CashierEntity;
 import entities.ProductEntity;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import javafx.util.Callback;
 import services.CashReceiptService;
 import services.CashierService;
 import services.ProductService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
-public class shoppingStepOneController implements Initializable {
+public class shoppingController implements Initializable {
 
     @FXML
     Button btnOK;
@@ -32,6 +36,7 @@ public class shoppingStepOneController implements Initializable {
     Button btnAdd;
     @FXML
     TextField cashierID;
+    @FXML Button btnNewSale;
     @FXML
     TextField productID;
     @FXML
@@ -39,42 +44,95 @@ public class shoppingStepOneController implements Initializable {
     @FXML
     Text message;
     @FXML
+    Text label1;
+    @FXML
+    Text label2;
+    @FXML
+    Text bigLabel;
+    @FXML
     Text messageForSale;
+    @FXML ListView cashRecieptList;
+    @FXML Button btnPrint;
 
 
-    ProductService productService = new ProductService();
+    ProductService productService;
     ProductEntity productEntity = new ProductEntity();
     CashierService cashierService = new CashierService();
+    CashReceiptEntity entity = new CashReceiptEntity();
+    CashReceiptService cashReceiptService = new CashReceiptService();
 
-    public void issueReceipt(ActionEvent actionEvent){
+    public void printReciept(ActionEvent actionEvent){
+        cashReceiptService.writeCashReceiptToFile(entity);
+        productService.getProductsToBeSold().clear();
+        btnNewSale.setDisable(false);
+        btnPrint.setDisable(true);
+    }
 
+    public void backToStart(ActionEvent actionEvent){
 
-        CashReceiptService cashReceiptService = new CashReceiptService();
-        CashReceiptEntity cashReceiptEntity = cashReceiptService.generateCashReceipt(productEntity.getShop(),cashierService.getCashierById(Integer.parseInt(cashierID.getText())),productService.getProductsToBeSold());
-
-        System.out.println(cashReceiptEntity);
-
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/shopping.fxml"));
+        Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader();
-            Parent addChildView = loader.load(getClass().getClassLoader().getResource("view/shoppingStepTwo.fxml"));
-
-            loader.load(getClass().getClassLoader().getResource("view/shoppingStepTwo.fxml"));
-            shoppingStepTwoController stepTwoController = new shoppingStepTwoController();
-            loader.setController(stepTwoController);
-            stepTwoController = loader.getController();
-            stepTwoController.passReceipt(cashReceiptEntity);
-
-            Scene addChildScene = new Scene(addChildView);
-
-            Stage window = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-            window.setScene(addChildScene);
-            window.show();
-
+            root = fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        btnNewSale.getScene().setRoot(root);
 
 
+    }
+    public void issueReceipt(ActionEvent actionEvent){
+
+
+
+        entity = cashReceiptService.generateCashReceipt(productEntity.getShop(),cashierService.getCashierById(Integer.parseInt(cashierID.getText())),productService.getProductsToBeSold());
+        entity = cashReceiptService.generateCashReceipt(productEntity.getShop(),cashierService.getCashierById(Integer.parseInt(cashierID.getText())),productService.getProductsToBeSold());
+
+
+        cashRecieptList.setVisible(true);
+        btnNewSale.setVisible(true);
+        btnNewSale.setDisable(true);
+        btnPrint.setVisible(true);
+        productID.setVisible(false);
+        productAmount.setVisible(false);
+        btnAdd.setVisible(false);
+        generateReciept.setVisible(false);
+        message.setVisible(false);
+        messageForSale.setText("Общо: " + entity.getTotalPrice() + "лв.");
+        btnOK.setVisible(false);
+        label1.setVisible(false);
+        label2.setVisible(false);
+        bigLabel.setText("Вашата касова бележка");
+
+        List<ProductEntity> list = new ArrayList<>(entity.products().keySet());
+
+        ObservableList<ProductEntity> observableList = FXCollections.observableList(list);
+
+
+        cashRecieptList.setCellFactory(new Callback<ListView<ProductEntity>,ListCell<ProductEntity>>(){
+
+            @Override
+            public ListCell<ProductEntity> call(ListView<ProductEntity> p) {
+                final ListCell<ProductEntity> cell = new ListCell<ProductEntity>(){
+                    @Override
+                    protected void updateItem(ProductEntity t, boolean bln) {
+                        super.updateItem(t, bln);
+
+                        if(t != null){
+                            setText(t.getName() + " " + entity.products().get(t)+"бр.");
+                        }else{
+                            setText(null);
+                        }
+                    }
+
+                };
+
+                return cell;
+            }
+
+        });
+        cashRecieptList.getItems().setAll(observableList);
+        productService.deleteAllProductsMarkedForSell();
 
     }
 
@@ -109,6 +167,9 @@ public class shoppingStepOneController implements Initializable {
                     } else {
 
                         productService.markProductForSell(productEntity, givenAmount, productEntity.getShop());
+                        for(Map.Entry<ProductEntity,Integer> entry : productService.getProductsToBeSold().entrySet()){
+                            System.out.println(entry.getKey().getName() +" "+ entry.getValue());
+                        }
                         messageForSale.setText("Продуктът е успешно добавен в количката!");
                         generateReciept.setDisable(false);
                     }
@@ -153,9 +214,15 @@ public class shoppingStepOneController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        productService = new ProductService();
+
         productID.setDisable(true);
         productAmount.setDisable(true);
         btnAdd.setDisable(true);
         generateReciept.setDisable(true);
+        cashRecieptList.setVisible(false);
+        btnPrint.setVisible(false);
+        btnNewSale.setVisible(false);
+        cashRecieptList.getItems().clear();
     }
 }
