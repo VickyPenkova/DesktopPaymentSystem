@@ -40,7 +40,7 @@ public class addShopCobntroller implements Initializable {
             shopService.addShop(name.getText(),address.getText());
             name.setText("");
             address.setText("");
-            message.setText("Магазинът е записан в базата от данни! (дано)");
+            message.setText("Магазинът е записан в базата от данни!");
 
         }
 

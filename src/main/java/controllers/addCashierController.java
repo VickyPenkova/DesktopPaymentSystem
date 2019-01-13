@@ -46,7 +46,7 @@ public class addCashierController implements Initializable {
             cashierService.addCashierInShop(firstName.getText(),lastName.getText(),((ShopEntity)shops.getSelectionModel().getSelectedItem()).getShopId());
             firstName.setText("");
             lastName.setText("");
-            message.setText("Касиерът е записан в базата от данни! (дано)");
+            message.setText("Касиерът е записан в базата от данни!");
 
         }
 

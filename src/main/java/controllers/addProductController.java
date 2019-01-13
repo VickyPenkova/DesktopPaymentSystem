@@ -85,7 +85,7 @@ public class addProductController implements Initializable {
                 price.setText("");
                 quantity.setText("");
                 id.setText("");
-                message.setText("Продуктът е записан в базата от данни! (дано)");
+                message.setText("Продуктът е записан в базата от данни!");
             }
         }
     }

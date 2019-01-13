@@ -12,7 +12,7 @@
             <Font name="Segoe UI" size="27.0" />
          </font>
       </Text>
-      <Text layoutX="482.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kindA">
+      <Text layoutX="184.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Моля, изберете опция от менюто">
          <font>
             <Font name="Segoe UI" size="15.0" />
          </font>
